@@ -12,7 +12,6 @@ class TabContent extends Component {
       <If test={visible}>
         <div id={this.props.id} className={`tab-pane ${selected ? 'active' : '' }`}>
           {this.props.children}
-          {console.log(this.props)}
         </div>
       </If>
     )
