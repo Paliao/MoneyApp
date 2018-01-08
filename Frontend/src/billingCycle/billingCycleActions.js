@@ -31,3 +31,10 @@ export function create(values) {
       })
   }
 }
+
+export function showUpdate(billinCycle) {
+  return [
+    showTabs('tabUpdate'),
+    selectTab('tabUpdate')
+  ]
+}
