@@ -46,6 +46,20 @@ export function showUpdate(billinCycle) {
   ]
 }
 
+export function remove(values){
+  return[
+    submit(values, 'delete')
+  ]
+}
+
+export function showDelete(billinCycle) {
+  return [
+    showTabs('tabDelete'),
+    selectTab('tabDelete'),
+    initialize('billingCycleForm', billinCycle)
+  ]
+}
+
 export function init() {
   return [
     showTabs('tabList', 'tabCreate'),
