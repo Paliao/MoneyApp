@@ -79,4 +79,4 @@ const signUp = (req, res, next) => {
   })
 }
 
-module.exports = { login, signup, validateToken}
+module.exports = { login, signUp, validateToken}
