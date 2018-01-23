@@ -13,7 +13,7 @@ const sendErrorsFromDB = (res, dbErrors) => {
   return res.status(400).json({errors})
 }
 
-const login = (req, res, nex) => {
+const login = (req, res, next) => {
   const email = req.body.email || ''
   const password = req.body.password || ''
 
@@ -21,7 +21,7 @@ const login = (req, res, nex) => {
     if(err) {
       return sendErrorsFromDB(res, err)
     } else if(user && bcrypt.compareSync(password, user.password)) {
-      const token = jwt.sign(user, evn.authSecret, {
+      const token = jwt.sign(user, env.authSecret, {
         expiresIn: '1 day'
       })
       const { name, email } = user
