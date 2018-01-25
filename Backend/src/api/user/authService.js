@@ -14,15 +14,15 @@ const sendErrorsFromDB = (res, dbErrors) => {
 }
 
 const login = (req, res, next) => {
-  const email = req.body.email || ''
-  const password = req.body.password || ''
+  const email = req.body.email || ""
+  const password = req.body.password || ""
 
-  User.findOne({email}, (err, user) => {
-    if(err) {
+  User.findOne({ email }, (err, user) => {
+    if (err) {
       return sendErrorsFromDB(res, err)
-    } else if(user && bcrypt.compareSync(password, user.password)) {
+    } else if (user && bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign(user, env.authSecret, {
-        expiresIn: '1 day'
+        expiresIn: "1 day"
       })
       const { name, email } = user
       res.json({ name, email, token })
@@ -35,7 +35,7 @@ const login = (req, res, next) => {
 const validateToken = (req, res, next) => {
   const token = req.body.token || ''
   jwt.verify(token, env.authSecret, function(err, decoded) {
-    return resizeBy.status.send({valid: !err})
+    return res.status(200).send({ valid: !err })
   })
 }
 
@@ -43,21 +43,15 @@ const signUp = (req, res, next) => {
   const name = req.body.name || ''
   const email = req.body.email || ''
   const password = req.body.password || ''
-  const confirm_password = req.body.confirm_password || ''
+  const confirmPassword = req.body.confirm_password || ''
 
   if(!email.match(emailRegex)) {
     return res.status(400).send({errors: ['The email is invalid']})
   }
 
-  if(!password.match(passwordRegex)) {
-    return res.status(400).sen({errors: 
-      ['Password must have: a capital letter, a lowercase letter, a number, a special character (@ # $%) and size between 6-20'
-    ]})
-  }
-
   const salt = bcrypt.genSaltSync()
   const passwordHash = bcrypt.hashSync(password, salt)
-  if(!bcrypt.compareSync(confirm_password, passwordHash)){
+  if(!bcrypt.compareSync(confirmPassword, passwordHash)){
     return res.status(400).send({errors: ['The password and password confirmation does not match']})
   }
 
