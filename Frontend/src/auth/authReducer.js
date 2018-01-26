@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'TOKEN_VALIDATED':
-      if(action.payload) {
+      if (action.payload) {
         return {...state, validToken: true}
       } else {
         localStorage.removeItem(userKey)
@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
       }
     case 'USER_FETCHED':
       localStorage.setItem(userKey, JSON.stringify(action.payload))
-      return {...state, user:action.payload, validToken: true}
+      return {...state, user: action.payload, validToken: true}
     default:
       return state
   }

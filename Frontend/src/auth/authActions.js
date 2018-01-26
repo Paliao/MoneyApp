@@ -13,7 +13,7 @@ export function signUp(values) {
 function submit(values, url) {
   return dispatch => {
     axios.post(url, values)
-      .then(resp => {
+    .then(resp => {
         dispatch([
           {type: 'USER_FETCHED', payload: resp.data}
         ])
@@ -27,7 +27,7 @@ function submit(values, url) {
   }
 }
 
-export function logOut() {
+export function logout() {
   return { type: 'TOKEN_VALIDATED', payload: false }
 }
 
