@@ -17,7 +17,7 @@ BillingCycle.route('count', (req, res, next) => {
 
 BillingCycle.route('summary', (req, res, next ) => {
   BillingCycle.aggregate({
-    $project: { credit: { $sum: "$credits.value"}, debt: { $sum: "$debts.value"}},
+    $project: { credit: { $sum: "$credits.value"}, debt: { $sum: "$debts.value"}}
   }, {
     $group: { _id: null, credit: { $sum: "$credit"}, debt: {$sum: "$debt"}}
   }, {
